@@ -25,9 +25,6 @@ jobs:
   build:
     strategy:
       matrix:
-        # Include amd64 on all platforms.
-        goos: [windows, freebsd, openbsd, linux, dragonfly, darwin]
-        goarch: [amd64, 386]
         exclude:
           # Exclude i386 on darwin and dragonfly.
           - goarch: 386
@@ -60,6 +57,7 @@ jobs:
       GOARCH: ${{ matrix.goarch }}
       GOARM: ${{ matrix.goarm }}
       CGO_ENABLED: 0
+      CC: arm-linux-gnueabi-gcc
 
     steps:
       - name: Checkout codebase
